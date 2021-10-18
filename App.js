@@ -8,6 +8,8 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import DefaultText from "./components/DefaultText";
 import DefaultTitle from "./components/DefaultTitle";
+import BottomMenu from "./navigation/BottomMenu";
+import { NavigationContainer } from "@react-navigation/native";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -31,9 +33,9 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <DefaultText>Hello</DefaultText>
-    </View>
+    <NavigationContainer>
+      <BottomMenu />
+    </NavigationContainer>
   );
 }
 
