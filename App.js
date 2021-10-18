@@ -1,14 +1,38 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import StartingScreen from "./screens/StartingScreen";
+
+import { useScreens } from "react-native-screens";
+
+import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+import DefaultText from "./components/DefaultText";
+import DefaultTitle from "./components/DefaultTitle";
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "roboto-regular": require("./assets/Fonts/Roboto-Regular.ttf"),
+    "roboto-bold": require("./assets/Fonts/Roboto-Bold.ttf"),
+    "roboto-light": require("./assets/Fonts/Roboto-Light.ttf"),
+  });
+};
+
 export default function App() {
+  // Loading up base fonts
+  const [fontLoaded, setFontLoaded] = useState(false);
+  if (!fontLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {/* Maps to StartingScreen here */}
-      {/* <StartingScreen /> */}
-      {/* <StatusBar style="auto" /> */}
-      {/* <Text>Start App</Text> */}
+      <DefaultText>Hello</DefaultText>
     </View>
   );
 }
