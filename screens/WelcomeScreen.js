@@ -1,20 +1,27 @@
-import React from "react";
-import { StyleSheet, Text, View, ImageBackground, Dimensions } from "react-native";
+import React, {useState} from "react";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, TouchableWithoutFeedback } from "react-native";
 
 const WelcomeScreen = () => {
+    
     const image = require('../assets/background_shade.png');
+    const [welcomeText, setWelcomeText] = useState("Welcome to Lotus")
+    
+    // change text when user clicks on any parts of the screen
+    const changeText= () =>{
+        setWelcomeText("We work so you can keep in touch with your elders")
+    }
 
     return (
-        <View style={stylesWelcome.welcomeLayout}>
-        
+        <TouchableWithoutFeedback onPress={changeText} style={stylesWelcome.welcomeLayout}>
+
             <ImageBackground source={image} resizeMode="cover" style={stylesWelcome.welcomeImage}>
                 <View style={stylesWelcome.welcomeHeadingContainer}>
-                    <Text style={stylesWelcome.welcomeHeading}>Welcome to Lotus</Text>
+                    <Text style={stylesWelcome.welcomeHeading}>{welcomeText}</Text>
                 </View>
+
             </ImageBackground>
 
-
-      </View>
+        </TouchableWithoutFeedback>
   );
 };
 
@@ -26,7 +33,7 @@ const stylesWelcome = StyleSheet.create({
     },
     welcomeHeading:{
         fontWeight:"bold",
-        fontSize:50,
+        fontSize:30,
         color:"white",
         textAlign:"center"
     }, 
