@@ -1,10 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Dimensions } from "react-native";
 
 const WelcomeScreen = () => {
-  return (
-      <View style={stylesWelcome.welcomeLayout}>
-            <Text style={stylesWelcome.welcomeHeading}>Welcome</Text>
+    const image = require('../assets/background_shade.png');
+
+    return (
+        <View style={stylesWelcome.welcomeLayout}>
+        
+            <ImageBackground source={image} resizeMode="cover" style={stylesWelcome.welcomeImage}>
+                <View style={stylesWelcome.welcomeHeadingContainer}>
+                    <Text style={stylesWelcome.welcomeHeading}>Welcome to Lotus</Text>
+                </View>
+            </ImageBackground>
+
+
       </View>
   );
 };
@@ -12,13 +21,23 @@ const WelcomeScreen = () => {
 const stylesWelcome = StyleSheet.create({
     welcomeLayout:{
         flex: 1,
-        backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
     },
     welcomeHeading:{
         fontWeight:"bold",
-        fontSize:50
+        fontSize:50,
+        color:"white",
+        textAlign:"center"
+    }, 
+    welcomeHeadingContainer:{
+        padding: 20
+    },
+    welcomeImage:{
+        flex: 1,
+        justifyContent: "center",
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
     }
 });
 export default WelcomeScreen;
