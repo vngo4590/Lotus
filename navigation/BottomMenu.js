@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 // Components for bottom navigator
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -20,6 +20,7 @@ import FAQScreen from "../screens/FAQScreen";
 const defaultStackNavOptions = {
   headerShown: false,
   headerBackVisible: false,
+  shifting: true,
   showLabel: false,
   tabBarShowLabel: false,
   tabBarActiveTintColor: Colors.darkColor,
@@ -94,18 +95,12 @@ const BottomMenu = (props) => {
       activeColor="black"
       screenOptions={defaultStackNavOptions}
       labeled={false}
-      barStyle={styles.menuBar}
-      sceneContainerStyle={styles.menuBar}
     >
       <Tab.Screen
         name="Home"
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="home-heart"
-              size={size}
-              color={color}
-            />
+            <Ionicons name="home-sharp" size={size} color={color} />
           ),
         }}
         component={HomeStack}
@@ -115,24 +110,7 @@ const BottomMenu = (props) => {
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account-circle"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsStack}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="home-heart"
-              size={size}
-              color={color}
-            />
+            <Ionicons name="person-circle-sharp" size={size} color={color} />
           ),
         }}
       />
@@ -141,11 +119,16 @@ const BottomMenu = (props) => {
         component={FAQStack}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="home-heart"
-              size={size}
-              color={color}
-            />
+            <FontAwesome name="question-circle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="ios-settings-sharp" size={size} color={color} />
           ),
         }}
       />
@@ -153,6 +136,11 @@ const BottomMenu = (props) => {
   );
 };
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({
+//   menuBar: {
+//     paddingVertical: 40,
+//     backgroundColor: Colors.darkBlueColor,
+//   },
+// });
 
 export default BottomMenu;

@@ -12,7 +12,6 @@ import DefaultText from "./components/DefaultText";
 import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
-import Colors from "./constants/Colors";
 
 const fetchFonts = () => {
   return Font.loadAsync({
