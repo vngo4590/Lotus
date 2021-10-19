@@ -8,4 +8,5 @@ export default {
   darkBlueColor: "#3EACDF",
   purpleColor: "#9166C6",
   ignoredColor: "#CACACA",
+  darkColor: "#444444",
 };

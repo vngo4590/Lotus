@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -10,6 +12,7 @@ import DefaultText from "./components/DefaultText";
 import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
+import Colors from "./constants/Colors";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -35,6 +38,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <BottomMenu />
+      <StatusBar style="auto" animated={true} />
     </NavigationContainer>
   );
 }
@@ -45,5 +49,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  statusbarStyle: {
+    backgroundColor: "black",
   },
 });
