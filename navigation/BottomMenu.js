@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-
 // Components for bottom navigator
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -17,12 +16,25 @@ import FAQScreen from "../screens/FAQScreen";
 /**
  * The navigationOptions you set on the navigator will NOT be used in its screens! That's the difference to defaultNavigationOptions - those option WILL be merged with the screens.
  */
-const defaultStackNavOptions = {
+const hideHeader = {
   headerShown: false,
   headerBackVisible: false,
+};
+const defaultStackNavOptions = {
   shifting: true,
   showLabel: false,
-  tabBarShowLabel: false,
+  // tabBarShowLabel: false,
+  tabBarLabelStyle: {
+    fontSize: 12,
+    fontFamily: "roboto-regular",
+    marginBottom: 10,
+  },
+  tabBarStyle: {
+    position: "absolute",
+    height: 70,
+    padding: 10,
+  },
+
   tabBarActiveTintColor: Colors.darkColor,
   tabBarInactiveTintColor: Colors.ignoredColor,
 };
@@ -36,14 +48,14 @@ const FAQNavigator = createStackNavigator();
 // Each of these functions will have different linking routes
 function HomeStack() {
   return (
-    <HomeNavigator.Navigator screenOptions={defaultStackNavOptions}>
+    <HomeNavigator.Navigator screenOptions={hideHeader}>
       <HomeNavigator.Screen name="Home Screen" component={HomeScreen} />
     </HomeNavigator.Navigator>
   );
 }
 function ProfileStack() {
   return (
-    <ProfileNavigator.Navigator screenOptions={defaultStackNavOptions}>
+    <ProfileNavigator.Navigator screenOptions={hideHeader}>
       <ProfileNavigator.Screen
         name="Profile Screen"
         component={ProfileScreen}
@@ -53,7 +65,7 @@ function ProfileStack() {
 }
 function SettingsStack() {
   return (
-    <SettingsNavigator.Navigator screenOptions={defaultStackNavOptions}>
+    <SettingsNavigator.Navigator screenOptions={hideHeader}>
       <SettingsNavigator.Screen
         name="Settings Screen"
         component={SettingsScreen}
@@ -63,7 +75,7 @@ function SettingsStack() {
 }
 function FAQStack() {
   return (
-    <FAQNavigator.Navigator screenOptions={defaultStackNavOptions}>
+    <FAQNavigator.Navigator screenOptions={hideHeader}>
       <FAQNavigator.Screen name="FAQ Screen" component={FAQScreen} />
     </FAQNavigator.Navigator>
   );
@@ -93,7 +105,7 @@ const BottomMenu = (props) => {
       initialRouteName="HomeTab"
       inactiveColor={Colors.ignoredColor}
       activeColor="black"
-      screenOptions={defaultStackNavOptions}
+      screenOptions={{ ...defaultStackNavOptions, ...hideHeader }}
       labeled={false}
     >
       <Tab.Screen
@@ -136,11 +148,11 @@ const BottomMenu = (props) => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   menuBar: {
-//     paddingVertical: 40,
-//     backgroundColor: Colors.darkBlueColor,
-//   },
-// });
+const styles = StyleSheet.create({
+  // menuBar: {
+  //   paddingVertical: 40,
+  //   backgroundColor: Colors.darkBlueColor,
+  // },
+});
 
 export default BottomMenu;

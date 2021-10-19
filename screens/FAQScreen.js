@@ -59,7 +59,8 @@ const stylesFAQ = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 40,
-    marginVertical: 50,
+    marginTop: 50,
+    marginBottom: 60,
   },
   faqHeading: {
     fontSize: 35,
