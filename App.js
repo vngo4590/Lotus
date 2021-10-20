@@ -2,14 +2,12 @@ import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { useScreens } from "react-native-screens";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-import DefaultText from "./components/DefaultText";
-import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
 

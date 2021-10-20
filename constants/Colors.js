@@ -9,4 +9,6 @@ export default {
   purpleColor: "#9166C6",
   ignoredColor: "#CACACA",
   darkColor: "#444444",
+  activeColor: "#47C254",
+  inActiveColor: "#C24747",
 };
