@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
+
 const FAQScreen = () => {
   return (
     <ScrollView>
@@ -57,7 +58,7 @@ const stylesFAQ = StyleSheet.create({
   faqContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     margin: 40,
     marginTop: 50,
     marginBottom: 60,
