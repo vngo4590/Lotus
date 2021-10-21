@@ -1,6 +1,25 @@
 import React from "react";
 import Onboarding from 'react-native-onboarding-swiper';
-import {Image} from "react-native";
+import {View, Image} from "react-native";
+
+const Dots =({selected})=>{
+  let backgroundColor;
+
+  backgroundColor = selected ? '#F4456F' : '#FCE6E1';
+
+  return(
+    <View
+      style={{
+        width: 10,
+        height: 10, 
+        marginHorizontal: 8,
+        borderRadius: 25, 
+        backgroundColor
+      }}
+    />
+
+  );
+}
 
 
 const TutorialPage = ({navigation}) => {
@@ -12,8 +31,10 @@ const TutorialPage = ({navigation}) => {
       titleStyles={{fontWeight: 'bold'}}
       textStyle={{marginTop: 0, fontWeight: 'bold' }}
       imageContainerStyles={{paddingBottom:0}}
-
       containerStyles={{padding: 70}}
+      DotComponent={Dots}
+      bottomBarColor={'#fff'}
+      bottomBarHeight={140}
 
       pages={[
         {
