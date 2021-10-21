@@ -1,10 +1,12 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, Switch } from "react-native";
+import { StyleSheet, Text, View, Switch, Dimensions } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import DefaultContainer from "../components/DefaultContainer";
 import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import Card from "../components/Card";
+import MainButton from "../components/MainButton.android";
+
 
 // FCE6E1 light pink
 // F4456F dark pink
@@ -74,7 +76,7 @@ const SettingsScreen = (props) => {
           </View>
         </View>
 
-        {/* -who gets to choose */}
+        {/* -who gets to choose- */}
         <View style={styles.cardReminderContent}>
           <DefaultText style={styles.cardText2}>Colour Picker:</DefaultText>
 
@@ -112,11 +114,12 @@ const SettingsScreen = (props) => {
           <Text style={styles.additionalText}>FAQ and Support</Text>
           <Text style={styles.additionalText}>Privacy Policy</Text>
         </View>
-
-
-
         
       </Card>
+
+      <View style={styles.buttonCustom}>
+        <MainButton>Apply Changes</MainButton>
+      </View>
 
 
     </DefaultContainer>
@@ -188,6 +191,13 @@ const styles = StyleSheet.create({
   additionalInfoContainer:{
     width: "100%", 
     marginBottom: 20
+  }, 
+
+  buttonCustom:{
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: Dimensions.get("window").height > 600 ? 100 : 50,
   }
 
 });
