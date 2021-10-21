@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { StyleSheet, Text, View, Switch } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 import DefaultContainer from "../components/DefaultContainer";
 import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
@@ -15,10 +16,17 @@ const SettingsScreen = (props) => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
 
+  const [selectedValue, setSelectedValue] = useState("java");
+
   return (
     <DefaultContainer style={styles.container}>
+
       <DefaultTitle style={styles.mainHeader}>Settings</DefaultTitle>
+
+      {/* ======== REMINDER SECTION ==========*/}
       <Card style={styles.cardReminder}>
+
+        {/* -daily reminder-*/}
         <View style={styles.cardReminderContent}>
           <DefaultText style={styles.cardText}>Daily Reminder:</DefaultText>
           <Switch
@@ -30,6 +38,8 @@ const SettingsScreen = (props) => {
             style={styles.switch}
           />
         </View>
+
+        {/* -sound effects- */}
         <View style={styles.cardReminderContent}>
           <DefaultText style={styles.cardText}>Sound Effects:</DefaultText>
           <Switch
@@ -41,6 +51,74 @@ const SettingsScreen = (props) => {
           />
         </View>
       </Card>
+
+      {/* ======== REMINDER SECTION ==========*/}
+      <Card style={styles.cardAdditionalSettings}>
+
+        {/* -LANGUAGE-*/}
+        <View style={styles.cardReminderContent}>
+          <DefaultText style={styles.cardText2}>Language:</DefaultText>
+
+          <View style={styles.dropdownContainer}>
+            <Picker
+              selectedValue={selectedValue}
+              style={styles.dropdown}
+              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+              <Picker.Item label="English" value="EN" />
+              <Picker.Item label="Chinese" value="CN" />
+              <Picker.Item label="Spanish" value="ES" />
+              <Picker.Item label="Hindi" value="HI" />
+
+            </Picker>
+          </View>
+        </View>
+
+        {/* -who gets to choose */}
+        <View style={styles.cardReminderContent}>
+          <DefaultText style={styles.cardText2}>Colour Picker:</DefaultText>
+
+          <View style={styles.dropdownContainer}>
+            <Picker
+              selectedValue={selectedValue}
+              style={styles.dropdown}
+              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+              <Picker.Item label="Elderly" value="Elderly" />
+              <Picker.Item label="Everyone" value="Everyone" />
+
+            </Picker>
+          </View>
+        </View>
+
+        {/* -FREQUENCY-*/}
+        <View style={styles.cardReminderContent}>
+          <DefaultText style={styles.cardText2}>Frequency:</DefaultText>
+
+          <View style={styles.dropdownContainer}>
+            <Picker
+              selectedValue={selectedValue}
+              style={styles.dropdown}
+              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+              <Picker.Item label="Daily" value="Daily" />
+              <Picker.Item label="Every 2 days" value="Every 2 days" />
+              <Picker.Item label="Weekly" value="Weekly" />
+            </Picker>
+          </View>
+        </View>
+
+        <View style={styles.additionalInfoContainer}>
+          <Text style={styles.additionalText}>FAQ and Support</Text>
+          <Text style={styles.additionalText}>Privacy Policy</Text>
+        </View>
+
+
+
+        
+      </Card>
+
+
     </DefaultContainer>
   );
 };
@@ -63,7 +141,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     height: 120,
     width: "100%",
-    padding: 20
+    padding: 20,
+    marginBottom: 30
   },
   cardReminderContent:{
     flex: 2, 
@@ -77,6 +156,38 @@ const styles = StyleSheet.create({
   }, 
   switch: {
     marginBottom: 0
+  },
+  cardAdditionalSettings:{
+    height: 300,
+    width: "100%"
+  },
+  dropdownContainer:{
+
+    alignItems:"center",
+    borderRadius: 25,
+    borderWidth: 1,
+
+  },
+  dropdown:{
+    width: 130,
+    height: 40,
+    alignContent: "center", 
+    borderWidth: 1,
+    paddingLeft: 20,
+    fontSize: 10
+  },
+  cardText2:{
+    fontSize: 20,
+    marginTop: 3
+  }, 
+  additionalText:{
+    textAlign: "left",
+    marginBottom: 10,
+    textDecorationLine: 'underline'
+  },
+  additionalInfoContainer:{
+    width: "100%", 
+    marginBottom: 20
   }
 
 });
