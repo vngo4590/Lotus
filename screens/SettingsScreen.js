@@ -54,7 +54,7 @@ const SettingsScreen = (props) => {
         </View>
       </Card>
 
-      {/* ======== REMINDER SECTION ==========*/}
+      {/* ======== ADDITIONAL SETTINGS SECTION ==========*/}
       <Card style={styles.cardAdditionalSettings}>
 
         {/* -LANGUAGE-*/}
@@ -110,6 +110,7 @@ const SettingsScreen = (props) => {
           </View>
         </View>
 
+        {/* -ADDITIONAL TEXTS-*/}
         <View style={styles.additionalInfoContainer}>
           <Text style={styles.additionalText}>FAQ and Support</Text>
           <Text style={styles.additionalText}>Privacy Policy</Text>
@@ -117,6 +118,7 @@ const SettingsScreen = (props) => {
         
       </Card>
 
+        {/* -APPLY CHANGES BUTTON-*/}
       <View style={styles.buttonCustom}>
         <MainButton>Apply Changes</MainButton>
       </View>
