@@ -1,7 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import MenuIcon from "./MenuIcon";
+import MenuIcon from "../components/MenuIcon";
 import IconsConfigs from "../constants/IconsConfigs";
+import CloseButton from "../components/CloseButton";
+import DefaultTitle from "../components/DefaultTitle";
 
 const size = Dimensions.get("window").width * 0.7;
 const symbolSize = Dimensions.get("window").width * 0.2;
@@ -24,15 +26,16 @@ function setUpMenuConfig(itemNo, numItems) {
 }
 
 // general styling component
-const ColorMenu = (props) => {
+const ColorMenuScreen = (props) => {
   const imgLinks = IconsConfigs;
   const imgKeys = Object.keys(imgLinks);
   return (
     <View>
       <View>
+        <DefaultTitle style={styles.title}>Pick a Color</DefaultTitle>
         {imgKeys.map((key, index) => {
           return (
-            <View style={styles.iconWrapper}>
+            <View key={index} style={styles.iconWrapper}>
               <MenuIcon
                 imgSource={imgLinks[key].uri}
                 containerStyle={{
@@ -45,6 +48,12 @@ const ColorMenu = (props) => {
           );
         })}
       </View>
+      <CloseButton
+        onPress={() => {
+          // props.navigation.popToTop();
+          props.navigation.pop();
+        }}
+      />
     </View>
   );
 };
@@ -57,8 +66,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  title: {
+    textAlign: "center",
+    position: "absolute",
+    width: "100%",
+    top: Dimensions.get("window").height * 0.1,
+  },
   iconWrapper: {
     borderRadius: 100,
   },
 });
-export default ColorMenu;
+export default ColorMenuScreen;

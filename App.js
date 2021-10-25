@@ -4,12 +4,14 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 
-import { useScreens } from "react-native-screens";
+// import { useScreens } from "react-native-screens";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import ColorMenuScreen from "./screens/ColorMenuScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -18,6 +20,8 @@ const fetchFonts = () => {
     "roboto-light": require("./assets/Fonts/Roboto-Light.ttf"),
   });
 };
+
+const RootStack = createStackNavigator();
 
 export default function App() {
   // Loading up base fonts
@@ -34,7 +38,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <BottomMenu />
+      <RootStack.Navigator screenOptions={{ ...opacityTransition }}>
+        <RootStack.Screen name="BottomMenu" component={BottomMenu} />
+        <RootStack.Screen name="Color Menu" component={ColorMenuScreen} />
+      </RootStack.Navigator>
       <StatusBar style="auto" animated={true} />
     </NavigationContainer>
   );
@@ -51,3 +58,29 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
 });
+
+const opacityTransition = {
+  gestureDirection: "vertical-inverted",
+  presentation: "modal",
+  transitionSpec: {
+    open: {
+      animation: "timing",
+      delay: 300,
+    },
+    close: {
+      animation: "spring",
+      config: {
+        duration: 300,
+      },
+    },
+  },
+  headerShown: false,
+  headerBackVisible: false,
+  headerMode: "none",
+  // A config which just fades the screen
+  cardStyleInterpolator: ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  }),
+};

@@ -11,7 +11,6 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import FAQScreen from "../screens/FAQScreen";
-
 // Setting default Nav options onto the screens
 /**
  * The navigationOptions you set on the navigator will NOT be used in its screens! That's the difference to defaultNavigationOptions - those option WILL be merged with the screens.
