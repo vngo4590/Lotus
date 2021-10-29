@@ -20,21 +20,47 @@ const RegisterScreen = () => {
 
                 <DefaultContainer style={styles.buttonContainer}>
 
-                    <Pressable style={styles.buttonContainer}  onPress={() => setSelected(!selected)}
-                        style={{ backgroundColor: selected ? "red" : "transparent" }}
+                    <Pressable onPress={() => setSelected(!selected)}
+                        style={{ 
+                            backgroundColor: selected ? "#FCE6E1" : "transparent", 
+                            padding: 15, 
+                            width: 300,
+                            borderRadius: 10
+                        }}
                     >
-                        <Text style={styles.buttonText}>English</Text>
+                        <Text onPress={() => setSelected(!selected)} style={{
+
+                            color: selected ? "#F4456F" : "black",
+                            textAlign: "center",
+                            fontSize: 35
+                            
+                        }}>English</Text>
                     </Pressable>
 
-                    <Pressable style={styles.buttonContainer} >
+                    <Pressable 
+                        style={{ 
+                            backgroundColor:"transparent", 
+                            padding: 15, 
+                            width: 300}}
+                     >
                         <Text style={styles.buttonText}>中文</Text>
                     </Pressable>
 
-                    <Pressable style={styles.buttonContainer} >
+                    <Pressable 
+                        style={{ 
+                            backgroundColor: "transparent", 
+                            padding: 15, 
+                            width: 300}}
+                    >
                         <Text style={styles.buttonText}>español</Text>
                     </Pressable>
 
-                    <Pressable style={styles.buttonContainer}  >
+                    <Pressable 
+                        style={{ 
+                            backgroundColor: "transparent", 
+                            padding: 15, 
+                            width: 300}}
+                    >
                         <Text style={styles.buttonText}>Hindi</Text>
                     </Pressable>
 
@@ -56,23 +82,26 @@ const styles= StyleSheet.create({
         marginBottom: 60,
   },
   registerHeading: {
-        fontSize: 35,
+        fontSize: 50,
         fontWeight: "bold",
-        marginBottom: 30,
+        marginBottom:0,
+        marginTop: 120,
         textAlign: "justify",
   },
   buttonContainer:{
-        margin: 40,
+        margin: 10,
         padding: 30,
         borderColor: "black"
 
   },
   buttonLanguage:{
       marginTop: 50,
-      fontSize: 50,
+      fontSize: 40,
   },
   buttonText:{
-      color: "black"
+      color: "black",
+      textAlign: "center",
+      fontSize: 35
   }
 });
 
