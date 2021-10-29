@@ -13,6 +13,7 @@ import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
 import TutorialPage from "./screens/TutorialPage";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -37,7 +38,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <TutorialPage />
+      {/* <TutorialPage /> */}
+      <RegisterScreen/>
       {/* <BottomMenu />
       <StatusBar style="auto" animated={true} /> */}
     </NavigationContainer>
