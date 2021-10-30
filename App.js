@@ -12,10 +12,14 @@ import DefaultText from "./components/DefaultText";
 import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import TutorialPage from "./screens/TutorialPage";
 import RegisterScreen from "./screens/RegisterScreen";
 import RegisterScreen2 from "./screens/RegisterScreen2";
 import RegisterScreen3 from "./screens/RegisterScreen3";
+import HomeScreen from "./screens/HomeScreen";
+
+const AppStack = createStackNavigator(); 
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -40,10 +44,21 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <AppStack.Navigator headerMode="none">
+
+        <AppStack.Screen name="TutorialPage" component={TutorialPage}/>
+        <AppStack.Screen name="RegisterScreen" component={RegisterScreen}/>
+        <AppStack.Screen name="RegisterScreen2" component={RegisterScreen2}/>
+        <AppStack.Screen name="RegisterScreen3" component={RegisterScreen3}/>
+        <AppStack.Screen name="HomeScreen" component={HomeScreen}/>
+
+
+      </AppStack.Navigator>
+
       {/* <TutorialPage /> */}
-      <RegisterScreen3/>
       {/* <BottomMenu />
       <StatusBar style="auto" animated={true} /> */}
+
     </NavigationContainer>
   );
 }

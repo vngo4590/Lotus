@@ -25,9 +25,8 @@ const Dots =({selected})=>{
 const TutorialPage = ({navigation}) => {
   return (
     <Onboarding
-      // PINK STYLING TUTORIAL for ref
-      // titleStyles={{fontWeight: 'bold', color: '#fff'}}
-      // textStyle={{ color: '#fff', marginTop: 0, fontWeight: 'bold' }}
+      onSkip={() => navigation.navigate("RegisterScreen")}
+      onDone={() => navigation.navigate("RegisterScreen")}
       titleStyles={{fontWeight: 'bold'}}
       textStyle={{marginTop: 0, fontWeight: 'bold' }}
       imageContainerStyles={{paddingBottom:0}}

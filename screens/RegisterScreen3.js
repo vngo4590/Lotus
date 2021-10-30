@@ -4,7 +4,7 @@ import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
 
-const RegisterScreen3 = () => {
+const RegisterScreen3 = ({navigation}) => {
 
     const [text, onChangeText] = React.useState(" ");
     const [selected, setSelected] = useState(false);
@@ -26,20 +26,23 @@ const RegisterScreen3 = () => {
                 />
 
 
-                <Pressable onPress={() => setSelected(!selected)}
+                <Pressable onPressIn={() => setSelected(!selected)}
                         style={{
-                            backgroundColor: selected ? "#FCE6E1" : "transparent",  
+                            backgroundColor: selected ? "#FCE6E1" : "transparent",
+                            borderColor: selected ? "#F4456F" : "black",
                             padding: 10, 
                             width: 150,
                             borderRadius: 50,
                             borderWidth: 3,
                         }}
+                        onPress= {() => navigation.navigate("HomeScreen")}
+
                     >
-                        <Text onPress={() => setSelected(!selected)} style={{
+                        <Text onPressIn={() => setSelected(!selected)} style={{
 
                             color: selected ? "#F4456F" : "black",
                             textAlign: "center",
-                            fontSize: 16
+                            fontSize: 16,
                             
                         }}>Connect</Text>
                 </Pressable>

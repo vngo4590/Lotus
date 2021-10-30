@@ -4,7 +4,7 @@ import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
 
     const [selected, setSelected] = useState(false);
 
@@ -14,21 +14,21 @@ const RegisterScreen = () => {
         <ScrollView>
 
         <DefaultContainer style={styles.registerContainer}>
-            {/* Heading */}
 
                 <DefaultTitle style={styles.registerHeading}>Language</DefaultTitle>
 
                 <DefaultContainer style={styles.buttonContainer}>
 
-                    <Pressable onPress={() => setSelected(!selected)}
+                    <Pressable onPressIn={() => setSelected(!selected)}
                         style={{ 
                             backgroundColor: selected ? "#FCE6E1" : "transparent", 
                             padding: 15, 
                             width: 300,
                             borderRadius: 10
                         }}
+                        onPress= {() => navigation.navigate("RegisterScreen2")}
                     >
-                        <Text onPress={() => setSelected(!selected)} style={{
+                        <Text onPressIn={() => setSelected(!selected)} style={{
 
                             color: selected ? "#F4456F" : "black",
                             textAlign: "center",
