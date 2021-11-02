@@ -7,9 +7,11 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import DefaultText from "../components/DefaultText";
+import DefaultTitle from "../components/DefaultTitle";
+import DefaultContainer from "../components/DefaultContainer";
 import Constants from 'expo-constants';
 import * as Animatable from 'react-native-animatable';
-import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 
 const BACON_IPSUM =
@@ -17,24 +19,32 @@ const BACON_IPSUM =
 
 const CONTENT = [
   {
-    title: 'First',
-    content: BACON_IPSUM,
+    title:'How do I connect to a different Lotus?',
+    content:'Navigate to your account page and press “leave lotus”',
   },
   {
-    title: 'Second',
-    content: BACON_IPSUM,
+    title:'What does the colour on the main \npage mean?',
+    content:'This is the colour of the day chosen by another family member',
   },
   {
-    title: 'Third',
-    content: BACON_IPSUM,
+    title:'How do I choose the colour of the day?',
+    content:'When it is your turn to choose, the dropper icon will appear on the top left corner of all screens. Press the dropper icon to be taken to the choose colour page.',
   },
   {
-    title: 'Fourth',
-    content: BACON_IPSUM,
+    title:'When do I choose the colour of the day?',
+    content:'You will be notified when it is your turn and the main page will also let you know',
   },
   {
-    title: 'Fifth',
-    content: BACON_IPSUM,
+    title:'What do the icons on the pick \ncolour page mean?',
+    content:'These icons are used to increase the accessibility of the app and cater to those who are colourblind',
+  },
+  {
+    title:'How does the streak system work?',
+    content:'You receive daily streaks on days you consecutively use/check the app',
+  },
+  {
+    title:'I chose the wrong colour. How do I \nchange it?',
+    content:'The chosen colour cannot be changed',
   },
 ];
 
@@ -63,7 +73,8 @@ export default class NewFAQScreen extends Component {
         style={[styles.header, isActive ? styles.active : styles.inactive]}
         transition="backgroundColor"
       >
-        <Text style={styles.headerText}>{section.title}</Text>
+        <Text style={styles.headerText, isActive ? styles.activeText : styles.headerText}>{section.title} </Text>
+        <Text style={{color:"#F0466F", fontSize: 16}}>▼</Text>
       </Animatable.View>
     );
   };
@@ -75,7 +86,7 @@ export default class NewFAQScreen extends Component {
         style={[styles.content, isActive ? styles.active : styles.inactive]}
         transition="backgroundColor"
       >
-        <Animatable.Text animation={isActive ? 'fadeIn' : undefined}>
+        <Animatable.Text  style={{fontSize: 16, paddingLeft: 4}}animation={isActive ? 'fadeIn' : undefined}>
           {section.content}
         </Animatable.Text>
       </Animatable.View>
@@ -88,7 +99,7 @@ export default class NewFAQScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
-          <Text style={styles.title}>Accordion Example</Text>
+          <Text style={styles.title}>FAQ</Text>
           <Accordion
             activeSections={activeSections}
             sections={CONTENT}
@@ -113,55 +124,44 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   title: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '300',
-    marginBottom: 20,
+    // textAlign: 'center',
+    // fontSize: 22,
+    // fontWeight: '300',
+    // marginBottom: 20,
+    fontSize: 35,
+    fontWeight: "bold",
+    marginBottom: 30,
+    textAlign: "center",
+
   },
   header: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
+    backgroundColor: '#fff',
+    padding: 20,
+    flex: 1, 
+    flexDirection: "row",
+    justifyContent: 'space-between'
   },
   headerText: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 'bold',
+    color: "#000000"
   },
   content: {
     padding: 20,
     backgroundColor: '#fff',
   },
   active: {
-    backgroundColor: 'rgba(255,255,255,1)',
+    backgroundColor: '#fff',
+
   },
   inactive: {
-    backgroundColor: 'rgba(245,252,255,1)',
+    backgroundColor: '#fff',
   },
-  selectors: {
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  selector: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  activeSelector: {
-    fontWeight: 'bold',
-  },
-  selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
-  },
-  multipleToggle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 30,
-    alignItems: 'center',
-  },
-  multipleToggle__title: {
+  activeText:{
+    color: "#F0466F", 
+    textAlign: 'left',
     fontSize: 16,
-    marginRight: 8,
-  },
+    fontWeight: 'bold',
+  }
 });

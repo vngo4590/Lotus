@@ -11,6 +11,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import FAQScreen from "../screens/FAQScreen";
+import NewFAQScreen from "../screens/newFAQScreen";
 
 // Setting default Nav options onto the screens
 /**
@@ -76,7 +77,7 @@ function SettingsStack() {
 function FAQStack() {
   return (
     <FAQNavigator.Navigator screenOptions={hideHeader}>
-      <FAQNavigator.Screen name="FAQ Screen" component={FAQScreen} />
+      <FAQNavigator.Screen name="FAQ Screen" component={NewFAQScreen} />
     </FAQNavigator.Navigator>
   );
 }

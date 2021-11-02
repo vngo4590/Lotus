@@ -36,11 +36,11 @@ export default function App() {
   }
 
   return (
-    <NewFAQScreen/>
-    // <NavigationContainer>
-    //   <BottomMenu />
-    //   <StatusBar style="auto" animated={true} /> 
-    // </NavigationContainer>
+    // <NewFAQScreen/>
+    <NavigationContainer>
+      <BottomMenu />
+      <StatusBar style="auto" animated={true} /> 
+    </NavigationContainer>
   );
 }
 
