@@ -10,6 +10,9 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
+import NewFAQScreen from "./screens/newFAQScreen";
+import FAQScreen from "./screens/FAQScreen";
+
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -33,10 +36,11 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <BottomMenu />
-      <StatusBar style="auto" animated={true} />
-    </NavigationContainer>
+    <NewFAQScreen/>
+    // <NavigationContainer>
+    //   <BottomMenu />
+    //   <StatusBar style="auto" animated={true} /> 
+    // </NavigationContainer>
   );
 }
 
