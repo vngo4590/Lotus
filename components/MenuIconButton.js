@@ -8,16 +8,20 @@ import {
   Platform,
 } from "react-native";
 // import DefaultText from "./DefaultText";
-// import Colors from "../constants/Colors";
+import Colors from "../constants/Colors";
 
-const MenuIcon = (props) => {
+const MenuIconButton = (props) => {
   let ButtonComponent = TouchableOpacity;
   if (Platform.Version >= 21) {
-    ButtonComponent = TouchableNativeFeedback;
+    ButtonComponent = TouchableOpacity;
   }
   return (
-    <ButtonComponent activeOpacity={0.6} onPress={props.onPress}>
-      <View style={{ ...styles.container, ...props.containerStyle }}>
+    <ButtonComponent
+      style={[styles.container, props.containerStyle]}
+      activeOpacity={0.6}
+      onPress={props.onPress}
+    >
+      <View style={styles.imgContainer}>
         <Image
           source={props.imgSource}
           style={{ ...styles.imageStyle, ...props.iconStyle }}
@@ -45,9 +49,12 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 10,
   },
+  imgContainer: {
+    width: "100%",
+  },
   imageStyle: {
     width: "100%",
   },
 });
 
-export default MenuIcon;
+export default MenuIconButton;

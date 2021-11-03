@@ -12,6 +12,8 @@ import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ColorMenuScreen from "./screens/ColorMenuScreen";
+import Colors from "./constants/Colors";
+import { color } from "react-native-reanimated";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -26,6 +28,8 @@ const RootStack = createStackNavigator();
 export default function App() {
   // Loading up base fonts
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [colorOfTheDay, setColorOfTheDay] = useState(Colors.darkColor);
+
   if (!fontLoaded) {
     return (
       <AppLoading
@@ -35,12 +39,19 @@ export default function App() {
       />
     );
   }
-
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ ...opacityTransition }}>
-        <RootStack.Screen name="BottomMenu" component={BottomMenu} />
-        <RootStack.Screen name="Color Menu" component={ColorMenuScreen} />
+        <RootStack.Screen name="Bottom Menu" component={BottomMenu} />
+        <RootStack.Screen name="Color Menu">
+          {(props) => (
+            <ColorMenuScreen
+              {...props}
+              colorOfTheDay={colorOfTheDay}
+              setColorOfTheDay={setColorOfTheDay}
+            />
+          )}
+        </RootStack.Screen>
       </RootStack.Navigator>
       <StatusBar style="auto" animated={true} />
     </NavigationContainer>

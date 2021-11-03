@@ -1,15 +1,16 @@
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
-import MenuIcon from "../components/MenuIcon";
+import MenuIconButton from "../components/MenuIconButton";
 import IconsConfigs from "../constants/IconsConfigs";
 import CloseButton from "../components/CloseButton";
 import DefaultTitle from "../components/DefaultTitle";
-
+import MainButton from "../components/MainButton.android";
 const size = Dimensions.get("window").width * 0.7;
 const symbolSize = Dimensions.get("window").width * 0.2;
 const radius = size / 2;
 const centerX = Dimensions.get("window").width / 2;
-const centerY = Dimensions.get("window").height / 2;
+const centerY = Dimensions.get("window").height * 0.48;
+const buttonWidth = Dimensions.get("window").width / 2;
 
 function degToRad(deg) {
   return (deg * Math.PI) / 180;
@@ -33,10 +34,11 @@ const ColorMenuScreen = (props) => {
     <View>
       <View>
         <DefaultTitle style={styles.title}>Pick a Color</DefaultTitle>
+
         {imgKeys.map((key, index) => {
           return (
             <View key={index} style={styles.iconWrapper}>
-              <MenuIcon
+              <MenuIconButton
                 imgSource={imgLinks[key].uri}
                 containerStyle={{
                   ...styles.itemContainer,
@@ -47,6 +49,9 @@ const ColorMenuScreen = (props) => {
             </View>
           );
         })}
+        <View style={styles.buttonContainer}>
+          <MainButton>Select Color</MainButton>
+        </View>
       </View>
       <CloseButton
         onPress={() => {
@@ -70,10 +75,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     position: "absolute",
     width: "100%",
-    top: Dimensions.get("window").height * 0.1,
+    marginTop: Dimensions.get("window").height * 0.1,
   },
   iconWrapper: {
     borderRadius: 100,
+  },
+  buttonContainer: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    width: buttonWidth,
+    top: Dimensions.get("window").height * 0.8,
+    left: Dimensions.get("window").width * 0.5 - buttonWidth / 2,
   },
 });
 export default ColorMenuScreen;
