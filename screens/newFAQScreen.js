@@ -10,6 +10,7 @@ import {
 import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
+import Card from "../components/Card";
 import Constants from 'expo-constants';
 import * as Animatable from 'react-native-animatable';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -27,11 +28,11 @@ const CONTENT = [
     content:'This is the colour of the day chosen by another family member',
   },
   {
-    title:'How do I choose the colour of the day?',
+    title:'How do I choose the colour of \nthe day?',
     content:'When it is your turn to choose, the dropper icon will appear on the top left corner of all screens. Press the dropper icon to be taken to the choose colour page.',
   },
   {
-    title:'When do I choose the colour of the day?',
+    title:'When do I choose the colour of \nthe day?',
     content:'You will be notified when it is your turn and the main page will also let you know',
   },
   {
@@ -74,7 +75,7 @@ export default class NewFAQScreen extends Component {
         transition="backgroundColor"
       >
         <Text style={styles.headerText, isActive ? styles.activeText : styles.headerText}>{section.title} </Text>
-        <Text style={{color:"#F0466F", fontSize: 16}}>▼</Text>
+        <Text style={styles.headerText, isActive ? styles.activeText : styles.headerText}>▼</Text>
       </Animatable.View>
     );
   };
@@ -98,20 +99,26 @@ export default class NewFAQScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
-          <Text style={styles.title}>FAQ</Text>
-          <Accordion
-            activeSections={activeSections}
-            sections={CONTENT}
-            touchableComponent={TouchableOpacity}
-            expandMultiple={multipleSelect}
-            renderHeader={this.renderHeader}
-            renderContent={this.renderContent}
-            duration={400}
-            onChange={this.setSections}
-            renderAsFlatList={false}
-          />
+        <DefaultTitle style={styles.title}>FAQ</DefaultTitle>
+
+        <Card style={styles.cardUserContainer}>
+
+        <ScrollView >
+
+            <Accordion
+              activeSections={activeSections}
+              sections={CONTENT}
+              touchableComponent={TouchableOpacity}
+              expandMultiple={multipleSelect}
+              renderHeader={this.renderHeader}
+              renderContent={this.renderContent}
+              duration={400}
+              onChange={this.setSections}
+              renderAsFlatList={false}
+            />
         </ScrollView>
+        </Card>
+
       </View>
     );
   }
@@ -124,19 +131,17 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   title: {
-    // textAlign: 'center',
-    // fontSize: 22,
-    // fontWeight: '300',
-    // marginBottom: 20,
     fontSize: 35,
     fontWeight: "bold",
     marginBottom: 30,
     textAlign: "center",
+    paddingTop: Constants.statusBarHeight,
 
   },
   header: {
     backgroundColor: '#fff',
     padding: 20,
+    paddingLeft: 0, 
     flex: 1, 
     flexDirection: "row",
     justifyContent: 'space-between'
@@ -149,6 +154,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
+    paddingLeft: 0, 
     backgroundColor: '#fff',
   },
   active: {
@@ -163,5 +169,12 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 16,
     fontWeight: 'bold',
-  }
+  },
+  cardUserContainer: {
+    alignItems: "center",
+    height: "70%",
+    width: "90%",
+    justifyContent: "center",
+    marginLeft: 20
+  },
 });
