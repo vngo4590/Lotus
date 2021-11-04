@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import MenuIconButton from "../components/MenuIconButton";
-import IconsConfigs from "../constants/IconsConfigs";
+
 import CloseButton from "../components/CloseButton";
 import DefaultTitle from "../components/DefaultTitle";
 import MainButton from "../components/MainButton.android";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  toggleSelectColor,
+  toggleDeselectColor,
+  toggleSetColor,
+} from "../store/actions/ColorActions";
+
 const size = Dimensions.get("window").width * 0.7;
 const symbolSize = Dimensions.get("window").width * 0.2;
 const radius = size / 2;
@@ -26,39 +34,96 @@ function setUpMenuConfig(itemNo, numItems) {
   };
 }
 
+// https://www.sitepoint.com/javascript-generate-lighter-darker-color/
+function ColorLuminance(hex, lum) {
+  // validate hex string
+  hex = String(hex).replace(/[^0-9a-f]/gi, "");
+  if (hex.length < 6) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  lum = lum || 0;
+
+  // convert to decimal and change luminosity
+  var rgb = "#",
+    c,
+    i;
+  for (i = 0; i < 3; i++) {
+    c = parseInt(hex.substr(i * 2, 2), 16);
+    c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+    rgb += ("00" + c).substr(c.length);
+  }
+
+  return rgb;
+}
+
 // general styling component
 const ColorMenuScreen = (props) => {
-  const imgLinks = IconsConfigs;
-  const imgKeys = Object.keys(imgLinks);
+  // const imgLinks = IconsConfigs;
+  const colorData = useSelector((state) => state.colorset.colors);
+
+  const [colorSelected, setColorSelected] = useState(null);
+  const dispatch = useDispatch();
+  const updateColor = (color) => {
+    setColorSelected(color);
+  };
+
+  const selectColor = useCallback(() => {
+    dispatch(toggleSelectColor(colorSelected));
+  }, [colorSelected, dispatch]);
+
+  const deselectColor = useCallback(() => {
+    dispatch(toggleDeselectColor(colorSelected));
+  }, [colorSelected, dispatch]);
+
+  const setColor = useCallback(() => {
+    dispatch(toggleSetColor(colorSelected));
+  }, [colorSelected, dispatch]);
+
+  const onClose = () => {
+    deselectColor();
+    props.navigation.pop();
+  };
+  const onSelect = () => {
+    setColor();
+    onClose();
+  };
+
+  // Use effect to update the color
+  useEffect(() => {
+    selectColor();
+  }, [selectColor]);
+
   return (
     <View>
       <View>
         <DefaultTitle style={styles.title}>Pick a Color</DefaultTitle>
-
-        {imgKeys.map((key, index) => {
+        {colorData.map((color, index) => {
           return (
-            <View key={index} style={styles.iconWrapper}>
+            <View key={color.id} style={styles.iconWrapper}>
               <MenuIconButton
-                imgSource={imgLinks[key].uri}
+                imgSource={color.properties.uri}
                 containerStyle={{
                   ...styles.itemContainer,
-                  ...setUpMenuConfig(index + 1, imgKeys.length),
+                  ...setUpMenuConfig(index + 1, colorData.length),
+                  ...{
+                    backgroundColor:
+                      color.active == true
+                        ? color.name === "White"
+                          ? color.properties.color
+                          : ColorLuminance(color.properties.color, 0.3)
+                        : "white",
+                  },
                 }}
-                // iconStyle={styles.iconImage}
+                onPress={() => updateColor(color)}
               />
             </View>
           );
         })}
         <View style={styles.buttonContainer}>
-          <MainButton>Select Color</MainButton>
+          <MainButton onPress={onSelect}>Select Color</MainButton>
         </View>
       </View>
-      <CloseButton
-        onPress={() => {
-          // props.navigation.popToTop();
-          props.navigation.pop();
-        }}
-      />
+      <CloseButton onPress={onClose} />
     </View>
   );
 };
