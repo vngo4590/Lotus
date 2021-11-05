@@ -9,6 +9,7 @@ import UserStreakRank from "../components/UserStreakRank";
 import { USERS } from "../data/dummy-data";
 import MainButton from "../components/MainButton.android";
 import Colors from "../constants/Colors";
+import Constants from "expo-constants";
 function userSort(n) {
   let userSortedList = [];
   // for (int i=0) {
@@ -81,10 +82,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 50,
+    flex: 1,
+    // marginTop: 50,
+    paddingTop: Constants.statusBarHeight,
   },
   mainHeader: {
-    marginBottom: 20,
+    marginBottom: 30,
   },
   cardUserContainer: {
     alignItems: "flex-start",
