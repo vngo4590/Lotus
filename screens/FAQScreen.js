@@ -47,7 +47,7 @@ const CONTENT = [
   },
 ];
 
-export default class NewFAQScreen extends Component {
+export default class FAQScreen extends Component {
   state = {
     activeSections: [],
     collapsed: true,
@@ -110,7 +110,6 @@ export default class NewFAQScreen extends Component {
 
   render() {
     const { multipleSelect, activeSections } = this.state;
-
     return (
       <View style={styles.container}>
         <DefaultTitle style={styles.title}>FAQ</DefaultTitle>

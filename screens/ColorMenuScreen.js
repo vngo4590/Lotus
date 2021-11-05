@@ -11,6 +11,7 @@ import {
   toggleSelectColor,
   toggleDeselectColor,
   toggleSetColor,
+  ColorLuminance,
 } from "../store/actions/ColorActions";
 
 const size = Dimensions.get("window").width * 0.7;
@@ -34,30 +35,9 @@ function setUpMenuConfig(itemNo, numItems) {
   };
 }
 
-// https://www.sitepoint.com/javascript-generate-lighter-darker-color/
-function ColorLuminance(hex, lum) {
-  // validate hex string
-  hex = String(hex).replace(/[^0-9a-f]/gi, "");
-  if (hex.length < 6) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-  }
-  lum = lum || 0;
-
-  // convert to decimal and change luminosity
-  var rgb = "#",
-    c,
-    i;
-  for (i = 0; i < 3; i++) {
-    c = parseInt(hex.substr(i * 2, 2), 16);
-    c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
-    rgb += ("00" + c).substr(c.length);
-  }
-
-  return rgb;
-}
-
 // general styling component
 const ColorMenuScreen = (props) => {
+  const currentColor = useSelector((state) => state.colorset.colorSelected);
   // const imgLinks = IconsConfigs;
   const colorData = useSelector((state) => state.colorset.colors);
 
@@ -108,9 +88,9 @@ const ColorMenuScreen = (props) => {
                   ...{
                     backgroundColor:
                       color.active == true
-                        ? color.name === "White"
-                          ? color.properties.color
-                          : ColorLuminance(color.properties.color, 0.3)
+                        ? color.name === "White" || color.name === "Ice Blue"
+                          ? ColorLuminance(color.properties.color, 0.3)
+                          : ColorLuminance(color.properties.color, 0.7)
                         : "white",
                   },
                 }}

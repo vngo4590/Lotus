@@ -2,11 +2,9 @@ import React from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
 const DefaultContainer = (props) => {
   return (
-    <SafeAreaView>
-      <View style={{ ...styles.container, ...props.style }}>
-        {props.children}
-      </View>
-    </SafeAreaView>
+    <View style={{ ...styles.container, ...props.style }}>
+      {props.children}
+    </View>
   );
 };
 

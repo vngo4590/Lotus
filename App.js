@@ -13,7 +13,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import ColorMenuScreen from "./screens/ColorMenuScreen";
 
-import IconsConfigs from "./constants/IconsConfigs";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import colorReducer from "./store/reducers/ColorReducer";
@@ -49,7 +48,6 @@ export default function App() {
       />
     );
   }
-
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -65,8 +63,15 @@ export default function App() {
             )}
           </RootStack.Screen>
         </RootStack.Navigator>
-        <StatusBar style="auto" animated={true} />
       </NavigationContainer>
+
+      <StatusBar
+        style="auto"
+        barStyle="dark-content"
+        animated={true}
+        // backgroundColor={Colors.darkColor}
+        translucent={true}
+      />
     </Provider>
   );
 }

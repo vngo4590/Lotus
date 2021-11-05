@@ -8,7 +8,7 @@ import UserOnlineStatus from "../components/UserOnlineStatus";
 import UserStreakRank from "../components/UserStreakRank";
 import { USERS } from "../data/dummy-data";
 import MainButton from "../components/MainButton.android";
-import Colors from "../constants/Colors";
+import RenderColorMenu from "../components/RenderColorMenu";
 import Constants from "expo-constants";
 function userSort(n) {
   let userSortedList = [];
@@ -41,40 +41,43 @@ const ProfileScreen = (props) => {
     );
   };
   return (
-    <DefaultContainer style={styles.container}>
-      <DefaultTitle style={styles.mainHeader}>My Account</DefaultTitle>
-      <Card style={styles.cardUserContainer}>
-        <DefaultTitle style={styles.cardHeader}>Connections</DefaultTitle>
-        {/* <View style={styles.userList}>
+    <View>
+      <RenderColorMenu navigation={props.navigation} />
+      <DefaultContainer style={styles.container}>
+        <DefaultTitle style={styles.mainHeader}>My Account</DefaultTitle>
+        <Card style={styles.cardUserContainer}>
+          <DefaultTitle style={styles.cardHeader}>Connections</DefaultTitle>
+          {/* <View style={styles.userList}>
           
         </View> */}
-        <FlatList
-          keyExtractor={(item, index) => item.id}
-          data={USERS}
-          renderItem={renderUser}
-          numColumns={2}
-          columnWrapperStyle={styles.listUserStyle}
-          // contentContainerStyle={styles.listUserStyle}
-        />
-      </Card>
-      <Card
-        style={{ ...styles.cardUserContainer, ...styles.cardStreakContainer }}
-      >
-        <DefaultTitle style={styles.cardHeader}>Streak Podium</DefaultTitle>
-        {/* <UserStreakRank userName={"Hannah"} /> */}
-        <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={userSort(3)}
-          renderItem={renderUserStreak}
-          // numColumns={2}
-          // columnWrapperStyle={styles.listStreakStyle}
-          contentContainerStyle={styles.listStreakStyle}
-        />
-      </Card>
-      <View style={styles.buttonCustom}>
-        <MainButton>Leave Account</MainButton>
-      </View>
-    </DefaultContainer>
+          <FlatList
+            keyExtractor={(item, index) => item.id}
+            data={USERS}
+            renderItem={renderUser}
+            numColumns={2}
+            columnWrapperStyle={styles.listUserStyle}
+            // contentContainerStyle={styles.listUserStyle}
+          />
+        </Card>
+        <Card
+          style={{ ...styles.cardUserContainer, ...styles.cardStreakContainer }}
+        >
+          <DefaultTitle style={styles.cardHeader}>Streak Podium</DefaultTitle>
+          {/* <UserStreakRank userName={"Hannah"} /> */}
+          <FlatList
+            keyExtractor={(item, index) => index.toString()}
+            data={userSort(3)}
+            renderItem={renderUserStreak}
+            // numColumns={2}
+            // columnWrapperStyle={styles.listStreakStyle}
+            contentContainerStyle={styles.listStreakStyle}
+          />
+        </Card>
+        <View style={styles.buttonCustom}>
+          <MainButton>Leave Account</MainButton>
+        </View>
+      </DefaultContainer>
+    </View>
   );
 };
 
