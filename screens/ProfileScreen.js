@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
@@ -9,6 +9,9 @@ import { USERS } from "../data/dummy-data";
 import MainButton from "../components/MainButton.android";
 import RenderColorMenu from "../components/RenderColorMenu";
 import Constants from "expo-constants";
+import { toggleReset } from "../store/actions/ColorActions";
+import { useDispatch } from "react-redux";
+
 function userSort(n) {
   let userSortedList = [];
   // for (int i=0) {
@@ -39,9 +42,16 @@ const ProfileScreen = (props) => {
       />
     );
   };
+
+  const dispatch = useDispatch();
+  const resetColor = useCallback(() => {
+    dispatch(toggleReset());
+  }, [dispatch]);
   const onLeave = () => {
+    resetColor();
     props.navigation.navigate("RegisterScreen2");
   };
+
   return (
     <View>
       <RenderColorMenu navigation={props.navigation} />
