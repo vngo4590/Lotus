@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, FlatList, Dimensions } from "react-native";
-import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultContainer from "../components/DefaultContainer";
 import Card from "../components/Card";
@@ -40,6 +39,9 @@ const ProfileScreen = (props) => {
       />
     );
   };
+  const onLeave = () => {
+    props.navigation.navigate("RegisterScreen2");
+  };
   return (
     <View>
       <RenderColorMenu navigation={props.navigation} />
@@ -74,7 +76,7 @@ const ProfileScreen = (props) => {
           />
         </Card>
         <View style={styles.buttonCustom}>
-          <MainButton>Leave Account</MainButton>
+          <MainButton onPress={onLeave}>Leave Account</MainButton>
         </View>
       </DefaultContainer>
     </View>

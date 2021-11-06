@@ -11,15 +11,11 @@ import AppLoading from "expo-app-loading";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-<<<<<<< HEAD
 import TutorialPage from "./screens/TutorialPage";
 import RegisterScreen from "./screens/RegisterScreen";
 import RegisterScreen2 from "./screens/RegisterScreen2";
 import RegisterScreen3 from "./screens/RegisterScreen3";
-import HomeScreen from "./screens/HomeScreen";
 
-const AppStack = createStackNavigator(); 
-=======
 import ColorMenuScreen from "./screens/ColorMenuScreen";
 
 import { createStore, combineReducers } from "redux";
@@ -32,7 +28,6 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer);
->>>>>>> master
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -62,10 +57,16 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <RootStack.Navigator screenOptions={{ ...opacityTransition }}>
-        <AppStack.Screen name="TutorialPage" component={TutorialPage}/>
-        <AppStack.Screen name="RegisterScreen" component={RegisterScreen}/>
-        <AppStack.Screen name="RegisterScreen2" component={RegisterScreen2}/>
-        <AppStack.Screen name="RegisterScreen3" component={RegisterScreen3}/>
+          <RootStack.Screen name="TutorialPage" component={TutorialPage} />
+          <RootStack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <RootStack.Screen
+            name="RegisterScreen2"
+            component={RegisterScreen2}
+          />
+          <RootStack.Screen
+            name="RegisterScreen3"
+            component={RegisterScreen3}
+          />
           <RootStack.Screen name="Bottom Menu" component={BottomMenu} />
           <RootStack.Screen name="Color Menu">
             {(props) => (
