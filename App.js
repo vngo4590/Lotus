@@ -2,17 +2,16 @@ import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { useScreens } from "react-native-screens";
+// import { useScreens } from "react-native-screens";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
-import DefaultText from "./components/DefaultText";
-import DefaultTitle from "./components/DefaultTitle";
 import BottomMenu from "./navigation/BottomMenu";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+<<<<<<< HEAD
 import TutorialPage from "./screens/TutorialPage";
 import RegisterScreen from "./screens/RegisterScreen";
 import RegisterScreen2 from "./screens/RegisterScreen2";
@@ -20,6 +19,20 @@ import RegisterScreen3 from "./screens/RegisterScreen3";
 import HomeScreen from "./screens/HomeScreen";
 
 const AppStack = createStackNavigator(); 
+=======
+import ColorMenuScreen from "./screens/ColorMenuScreen";
+
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import colorReducer from "./store/reducers/ColorReducer";
+
+// Add redux
+const rootReducer = combineReducers({
+  colorset: colorReducer,
+});
+
+const store = createStore(rootReducer);
+>>>>>>> master
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,9 +42,13 @@ const fetchFonts = () => {
   });
 };
 
+const RootStack = createStackNavigator();
+
 export default function App() {
   // Loading up base fonts
   const [fontLoaded, setFontLoaded] = useState(false);
+  const [colorOfTheDay, setColorOfTheDay] = useState(null);
+
   if (!fontLoaded) {
     return (
       <AppLoading
@@ -41,25 +58,35 @@ export default function App() {
       />
     );
   }
-
   return (
-    <NavigationContainer>
-      <AppStack.Navigator headerMode="none">
-
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootStack.Navigator screenOptions={{ ...opacityTransition }}>
         <AppStack.Screen name="TutorialPage" component={TutorialPage}/>
         <AppStack.Screen name="RegisterScreen" component={RegisterScreen}/>
         <AppStack.Screen name="RegisterScreen2" component={RegisterScreen2}/>
         <AppStack.Screen name="RegisterScreen3" component={RegisterScreen3}/>
-        <AppStack.Screen name="HomeScreen" component={HomeScreen}/>
+          <RootStack.Screen name="Bottom Menu" component={BottomMenu} />
+          <RootStack.Screen name="Color Menu">
+            {(props) => (
+              <ColorMenuScreen
+                {...props}
+                colorOfTheDay={colorOfTheDay}
+                setColorOfTheDay={setColorOfTheDay}
+              />
+            )}
+          </RootStack.Screen>
+        </RootStack.Navigator>
+      </NavigationContainer>
 
-
-      </AppStack.Navigator>
-
-      {/* <TutorialPage /> */}
-      {/* <BottomMenu />
-      <StatusBar style="auto" animated={true} /> */}
-
-    </NavigationContainer>
+      <StatusBar
+        style="auto"
+        barStyle="dark-content"
+        animated={true}
+        // backgroundColor={Colors.darkColor}
+        translucent={true}
+      />
+    </Provider>
   );
 }
 
@@ -74,3 +101,29 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
 });
+
+const opacityTransition = {
+  gestureDirection: "vertical-inverted",
+  presentation: "modal",
+  transitionSpec: {
+    open: {
+      animation: "timing",
+      delay: 300,
+    },
+    close: {
+      animation: "spring",
+      config: {
+        duration: 300,
+      },
+    },
+  },
+  headerShown: false,
+  headerBackVisible: false,
+  headerMode: "none",
+  // A config which just fades the screen
+  cardStyleInterpolator: ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  }),
+};

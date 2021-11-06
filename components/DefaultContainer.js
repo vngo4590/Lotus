@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 const DefaultContainer = (props) => {
   return (
     <View style={{ ...styles.container, ...props.style }}>
