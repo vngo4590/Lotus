@@ -13,6 +13,7 @@ import {
   toggleSetColor,
   ColorLuminance,
 } from "../store/actions/ColorActions";
+import { topupUser } from "../store/actions/UserActions";
 
 const size = Dimensions.get("window").width * 0.7;
 const symbolSize = Dimensions.get("window").width * 0.2;
@@ -59,12 +60,17 @@ const ColorMenuScreen = (props) => {
     dispatch(toggleSetColor(colorSelected));
   }, [colorSelected, dispatch]);
 
+  const incrementStreak = useCallback(() => {
+    dispatch(topupUser());
+  }, [dispatch]);
+
   const onClose = () => {
     deselectColor();
     props.navigation.pop();
   };
   const onSelect = () => {
     setColor();
+    incrementStreak();
     onClose();
   };
 

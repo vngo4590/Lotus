@@ -21,10 +21,11 @@ import ColorMenuScreen from "./screens/ColorMenuScreen";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import colorReducer from "./store/reducers/ColorReducer";
-
+import userSetReducer from "./store/reducers/UserReducer";
 // Add redux
 const rootReducer = combineReducers({
   colorset: colorReducer,
+  userset: userSetReducer,
 });
 
 const store = createStore(rootReducer);

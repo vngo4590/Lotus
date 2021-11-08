@@ -1,17 +1,20 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Image, Dimensions } from "react-native";
-import ColorMenuButton from "../components/ColorMenuButton";
 import DefaultContainer from "../components/DefaultContainer";
 import DefaultTitle from "../components/DefaultTitle";
 import DefaultText from "../components/DefaultText";
 import { useSelector } from "react-redux";
 import Colors from "../constants/Colors";
-import { ColorLuminance } from "../store/actions/ColorActions";
+import { ColorLuminance, checkHexIsLight } from "../store/actions/ColorActions";
 import RenderColorMenu from "../components/RenderColorMenu";
+
+import StreakDisplay from "../components/StreakDisplay";
+
 // import colors from "native-base/lib/typescript/theme/base/colors";
 const HomeScreen = (props) => {
   const currentColor = useSelector((state) => state.colorset.selectedColor);
+  const currentUser = useSelector((state) => state.userset.currentUser);
   const ColorQuote = () => {
     if (currentColor == null) {
       return (
@@ -30,7 +33,7 @@ const HomeScreen = (props) => {
       );
     } else {
       const textStyle = {
-        color: ["White", "Yellow", "Ice Blue"].includes(currentColor.name)
+        color: checkHexIsLight(currentColor.properties.color)
           ? Colors.darkColor
           : Colors.whiteColor,
       };
@@ -90,6 +93,7 @@ const HomeScreen = (props) => {
     <View style={styles.outerContainer}>
       <RenderColorMenu navigation={props.navigation} />
       <ScreenColor />
+      <StreakDisplay user={currentUser} />
       <ColorIcon />
       <DefaultContainer style={styles.container}>
         <ColorQuote />
