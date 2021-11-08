@@ -15,6 +15,7 @@ import TutorialPage from "./screens/TutorialPage";
 import RegisterScreen from "./screens/RegisterScreen";
 import RegisterScreen2 from "./screens/RegisterScreen2";
 import RegisterScreen3 from "./screens/RegisterScreen3";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
 import ColorMenuScreen from "./screens/ColorMenuScreen";
 
@@ -22,6 +23,7 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import colorReducer from "./store/reducers/ColorReducer";
 import userSetReducer from "./store/reducers/UserReducer";
+
 // Add redux
 const rootReducer = combineReducers({
   colorset: colorReducer,
@@ -58,6 +60,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <RootStack.Navigator screenOptions={{ ...opacityTransition }}>
+          <RootStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <RootStack.Screen name="TutorialPage" component={TutorialPage} />
           <RootStack.Screen name="RegisterScreen" component={RegisterScreen} />
           <RootStack.Screen

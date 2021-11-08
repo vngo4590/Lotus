@@ -7,8 +7,8 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
 } from "react-native";
-
-const WelcomeScreen = () => {
+import DefaultTitle from "../components/DefaultTitle";
+const WelcomeScreen = (props) => {
   const image = require("../assets/background_shade.png");
   const [welcomeText, setWelcomeText] = useState("Welcome to Lotus");
   const [isTap, setTapped] = useState(false);
@@ -16,6 +16,9 @@ const WelcomeScreen = () => {
   const changeText = () => {
     if (!isTap) {
       setWelcomeText("We work so you can keep in touch with your elders");
+      setTapped(true);
+    } else {
+      props.navigation.navigate("TutorialPage");
     }
   };
 
@@ -30,7 +33,9 @@ const WelcomeScreen = () => {
         style={stylesWelcome.welcomeImage}
       >
         <View style={stylesWelcome.welcomeHeadingContainer}>
-          <Text style={stylesWelcome.welcomeHeading}>{welcomeText}</Text>
+          <DefaultTitle style={stylesWelcome.welcomeHeading}>
+            {welcomeText}
+          </DefaultTitle>
         </View>
       </ImageBackground>
     </TouchableWithoutFeedback>
@@ -51,6 +56,7 @@ const stylesWelcome = StyleSheet.create({
   },
   welcomeHeadingContainer: {
     padding: 20,
+    marginHorizontal: 20,
   },
   welcomeImage: {
     flex: 1,
