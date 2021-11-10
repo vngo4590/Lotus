@@ -6,7 +6,7 @@ import DefaultText from "../components/DefaultText";
 import DefaultTitle from "../components/DefaultTitle";
 import Card from "../components/Card";
 import MainButton from "../components/MainButton.android";
-
+import Constants from "expo-constants";
 // FCE6E1 light pink
 // F4456F dark pink
 
@@ -129,38 +129,36 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 50,
+    marginTop: Constants.statusBarHeight,
   },
   mainHeader: {
     marginBottom: 30,
-    marginTop: 20,
+    marginTop: Constants.statusBarHeight,
   },
   cardText: {
-    fontSize: 20,
-    marginBottom: 10,
+    fontSize: 18,
   },
   cardReminder: {
     alignItems: "flex-start",
     height: 120,
     width: "100%",
-    padding: 20,
-    marginBottom: 30,
+    paddingTop: 10,
+    marginBottom: Dimensions.get("window").height < 700 ? 20 : 30,
   },
   cardReminderContent: {
-    flex: 2,
     flexDirection: "row",
-    flexWrap: "wrap",
     justifyContent: "space-between",
-    height: 10,
     width: "100%",
-    padding: 0,
+    alignItems: "center",
+    margin: 10,
   },
   switch: {
-    marginBottom: 0,
+    // marginBottom: 0,
   },
   cardAdditionalSettings: {
-    height: 300,
+    height: Dimensions.get("window").height * 0.38,
     width: "100%",
+    paddingTop: 10,
   },
   dropdownContainer: {
     alignItems: "center",
@@ -168,16 +166,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   dropdown: {
-    width: 130,
-    height: 40,
+    width: Dimensions.get("window").width / 3,
+    height: Dimensions.get("window").height < 700 ? 35 : 40,
     alignContent: "center",
     borderWidth: 1,
     paddingLeft: 20,
     fontSize: 10,
   },
   cardText2: {
-    fontSize: 20,
-    marginTop: 3,
+    fontSize: 18,
+    marginTop: 10,
   },
   additionalText: {
     textAlign: "left",
@@ -186,14 +184,12 @@ const styles = StyleSheet.create({
   },
   additionalInfoContainer: {
     width: "100%",
-    marginBottom: 20,
   },
-
   buttonCustom: {
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: Dimensions.get("window").height > 600 ? 100 : 50,
+    marginTop: Dimensions.get("window").height < 700 ? 15 : 40,
   },
 });
 export default SettingsScreen;

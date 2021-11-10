@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     paddingTop: Constants.statusBarHeight * 2,
+    alignItems: "center",
   },
   title: {
     fontSize: 35,
@@ -148,8 +149,8 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "white",
-    padding: 20,
-    paddingLeft: 0,
+    marginBottom: 20,
+    marginTop: 10,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -161,8 +162,8 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   content: {
-    padding: 20,
-    paddingLeft: 0,
+    // padding: 20,
+    // paddingLeft: 0,
     backgroundColor: "white",
   },
   active: {
@@ -180,8 +181,7 @@ const styles = StyleSheet.create({
   cardUserContainer: {
     alignItems: "center",
     height: "70%",
-    width: "90%",
+    width: "85%",
     justifyContent: "center",
-    marginLeft: 20,
   },
 });

@@ -33,7 +33,7 @@ const ProfileScreen = (props) => {
     );
   };
   // console.log(userSort(3));
-  const renderUserStreak = (itemData) => {
+  const RenderUserStreak = (itemData) => {
     return (
       <UserStreakRank
         userName={itemData.item.name}
@@ -76,14 +76,28 @@ const ProfileScreen = (props) => {
         >
           <DefaultTitle style={styles.cardHeader}>Streak Podium</DefaultTitle>
           {/* <UserStreakRank userName={"Hannah"} /> */}
-          <FlatList
+          {/* <FlatList
             keyExtractor={(item, index) => index.toString()}
             data={userSort(3)}
-            renderItem={renderUserStreak}
+            renderItem={RenderUserStreak}
+            scrollEnabled={false}
             // numColumns={2}
             // columnWrapperStyle={styles.listStreakStyle}
             contentContainerStyle={styles.listStreakStyle}
-          />
+          /> */}
+          <View style={styles.listStreakStyle}>
+            {userSort(3).map((item, index) => {
+              const itemData = {
+                item: item,
+                index: index,
+              };
+              return (
+                <View key={index}>
+                  <RenderUserStreak item={item} index={index} />
+                </View>
+              );
+            })}
+          </View>
         </Card>
         <View style={styles.buttonCustom}>
           <MainButton onPress={onLeave}>Leave Account</MainButton>
@@ -106,7 +120,7 @@ const styles = StyleSheet.create({
   },
   cardUserContainer: {
     alignItems: "flex-start",
-    height: 250,
+    height: Dimensions.get("window").height * 0.3,
     width: "100%",
   },
   cardStreakContainer: {
@@ -122,10 +136,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   listUserStyle: {
-    // width: "100%",
-    // justifyContent: "space-between",
-    // alignContent: "stretch",
-    // backgroundColor: "green",
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -144,8 +154,10 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    height: Dimensions.get("window").height > 600 ? 100 : 50,
-    // backgroundColor: Colors.greenColor,
+    height:
+      Dimensions.get("window").height < 700
+        ? Dimensions.get("window").height * 0.1
+        : Dimensions.get("window").height * 0.15,
   },
 });
 export default ProfileScreen;
